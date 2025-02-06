@@ -50,6 +50,9 @@ velocity_x_next = np.zeros_like(velocity_x_prev)
 velocity_y_tent = np.zeros_like(velocity_y_prev)
 velocity_y_next = np.zeros_like(velocity_y_prev)
 
+plt.style.use("dark_background")
+plt.figure(figsize=(1.5*aspect_ratio,6))
+
 for iter in tqdm(range(n_time_steps)):
     
     ### Step 1 in algorithm: To predict the velocities according to NVS 
