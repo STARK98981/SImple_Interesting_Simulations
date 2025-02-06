@@ -142,7 +142,10 @@ for iter in tqdm(range(n_time_steps)):
     velocity_y_next[-1,:] = 0.0 # Top_wall (velocity is 0-->  dirichlet)
 
     velocity_x_next[1:-1,0] = 1.0 #inlet wall
-    velocity_x_next[1:-1,-1] = velocity_x_next[1:-1,-2] # Outlet wall, gradient is 0
+    inflow_mass_rate_next = np.sum(velocity_x_next[1:-1,0])
+    outflow_mass_rate_next = np.sum(velocity_x_next[1:-1,-2])
+
+    velocity_x_next[1:-1,-1] = velocity_x_next[1:-1,-2] * inflow_mass_rate_next / outflow_mass_rate_next # Outlet wall, gradient is 0
     velocity_x_next[0,:] = - velocity_x_next[1,:] # Bottom_wall (velocity is 0-->  dirichlet)
     velocity_x_next[-1,:] = - velocity_x_next[-2,:] # Top_wall (velocity is 0-->  dirichlet)
 
